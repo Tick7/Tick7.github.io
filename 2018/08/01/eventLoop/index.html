@@ -5,15 +5,25 @@
   
 
   
-  <title>Hexo</title>
+  <title>Event loop | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="Event loop一、相关概念1、线程和进程 进程：操作系统分配内存的基本单位，进程所属的内存中保存所有的执行代码和数据； 线程：CPU执行代码的基本单位；位于进程内部，一个进程可能同时存在多个线程，允许单个任务分成不同的部分运行。  2、JavaScript是单线程 JavaScript的主要用途是与用户互动，以及操作DOM。这决定了它只能是单线程。那么，加载耗时的JS任务会长时间占用主线程，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Event loop">
+<meta property="og:url" content="http://yoursite.com/2018/08/01/eventLoop/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Event loop一、相关概念1、线程和进程 进程：操作系统分配内存的基本单位，进程所属的内存中保存所有的执行代码和数据； 线程：CPU执行代码的基本单位；位于进程内部，一个进程可能同时存在多个线程，允许单个任务分成不同的部分运行。  2、JavaScript是单线程 JavaScript的主要用途是与用户互动，以及操作DOM。这决定了它只能是单线程。那么，加载耗时的JS任务会长时间占用主线程，">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/08/01/eventLoop/images/异步和同步的区别.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/01/eventLoop/images/执行脚本.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/01/eventLoop/images/Eventloop.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/01/eventLoop/images/例题2.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/01/eventLoop/images/eventloop和线程.png">
+<meta property="og:updated_time" content="2018-08-01T07:20:27.497Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="Event loop">
+<meta name="twitter:description" content="Event loop一、相关概念1、线程和进程 进程：操作系统分配内存的基本单位，进程所属的内存中保存所有的执行代码和数据； 线程：CPU执行代码的基本单位；位于进程内部，一个进程可能同时存在多个线程，允许单个任务分成不同的部分运行。  2、JavaScript是单线程 JavaScript的主要用途是与用户互动，以及操作DOM。这决定了它只能是单线程。那么，加载耗时的JS任务会长时间占用主线程，">
+<meta name="twitter:image" content="http://yoursite.com/2018/08/01/eventLoop/images/异步和同步的区别.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -60,9 +70,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-eventLoop" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-eventLoop" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/08/01/eventLoop/" class="article-date">
   <time datetime="2018-08-01T07:19:10.268Z" itemprop="datePublished">2018-08-01</time>
@@ -75,8 +83,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/eventLoop/">Event loop</a>
+    <h1 class="article-title" itemprop="name">
+      Event loop
     </h1>
   
 
@@ -226,128 +234,19 @@ setInterval(updateAnimations, 1000);
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-两个有序数组合并为一个有序数组" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/07/24/两个有序数组合并为一个有序数组/" class="article-date">
-  <time datetime="2018-07-24T13:53:42.859Z" itemprop="datePublished">2018-07-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/24/两个有序数组合并为一个有序数组/">两个有序数组合并为一个有序数组</a>
-    </h1>
+    <a href="/2018/07/24/两个有序数组合并为一个有序数组/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">两个有序数组合并为一个有序数组</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="已知两个有序数组，合并为一个有序数组；"><a href="#已知两个有序数组，合并为一个有序数组；" class="headerlink" title="已知两个有序数组，合并为一个有序数组；"></a>已知两个有序数组，合并为一个有序数组；</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">function merge(arr1, arr2)&#123;</span><br><span class="line">    var arr = [];</span><br><span class="line">    if (arr1.length === 0) &#123;</span><br><span class="line">        return arr = arr2;</span><br><span class="line">    &#125;</span><br><span class="line">    if (arr2.length === 0) &#123;</span><br><span class="line">        return arr = arr1;</span><br><span class="line">    &#125;</span><br><span class="line">    var i = 0;</span><br><span class="line">    var j = 0;</span><br><span class="line">    for (var m = 0; m &lt; arr1.length; m++) &#123;</span><br><span class="line">        for (var n = j; n &lt; arr2.length; n++) &#123;</span><br><span class="line">            if (arr1[m] &lt; arr2[n]&gt;) &#123;</span><br><span class="line">                arr.push(arr1[m]);</span><br><span class="line">                i++;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                arr.push(arr2[n]);</span><br><span class="line">                m--;</span><br><span class="line">                j++;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (i &lt; arr1.length) &#123;</span><br><span class="line">        return arr = arr.concat(arr1.slice(i, arr1.length));</span><br><span class="line">    &#125;</span><br><span class="line">    if (j &lt; arr2.length) &#123;</span><br><span class="line">        return arr = arr.concat(arr2.slice(j, arr2.length));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/24/两个有序数组合并为一个有序数组/" data-id="cjjzsmz430000to4503l0tnvv" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-启动了" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/04/15/启动了/" class="article-date">
-  <time datetime="2018-04-15T12:55:43.000Z" itemprop="datePublished">2018-04-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/15/启动了/">启动了</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/启动了/" data-id="cjg0ticqd0001lk45p3itedsu" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/04/15/hello-world/" class="article-date">
-  <time datetime="2018-04-15T12:08:32.819Z" itemprop="datePublished">2018-04-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/15/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/hello-world/" data-id="cjg0ticq50000lk45vsme76jv" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
 
 </section>
         
