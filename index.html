@@ -94,7 +94,7 @@
 <h3 id="3、同步和异步"><a href="#3、同步和异步" class="headerlink" title="3、同步和异步"></a>3、同步和异步</h3><blockquote>
 <p>所有任务可以分成两种，一种是同步任务（synchronous），另一种是异步任务（asynchronous）;</p>
 </blockquote>
-<p><img src="./images/异步和同步的区别.png" alt="同步和异步的区别"></p>
+<p><img src="images/异步和同步的区别.png" alt="同步和异步的区别"></p>
 <blockquote>
 <p><strong>总结异步过程的构成要素</strong>：发起一个异步请求、工作线程执行异步任务、通知主线程、主线程调用回调函数</p>
 </blockquote>
@@ -117,11 +117,11 @@ g(21);
 </code></pre><h3 id="2、有异步任务"><a href="#2、有异步任务" class="headerlink" title="2、有异步任务"></a>2、有异步任务</h3><blockquote>
 <p><strong>事件循环机制:</strong> 就是在执行上下文的过程中，对函数的入栈和出栈。执行前函数先入栈，执行完后函数出栈。如若遇到了一些异步操作像回调函数以及ajax、setTimeout等，会先将他们交给浏览器的其他模块去执行，执行完后，会把回调函数放入到 消息队列 中。当所有的 stack执行完后再开始执行 消息队列 中的函数。 </p>
 </blockquote>
-<p><img src="./images/Eventloop.png" alt=""></p>
+<p><img src="images/Eventloop.png" alt=""></p>
 <pre><code>console.log(1);
 setTimeout(function(){console.log(2);}, 0);
 console.log(3);
-</code></pre><p><img src="./images/例题2.png" alt=""></p>
+</code></pre><p><img src="images/例题2.png" alt=""></p>
 <blockquote>
 <p>在异步任务完成后，通知主线程，进入消息队列中，那么浏览器是否可以选择先执行哪个任务？</p>
 </blockquote>
@@ -205,7 +205,7 @@ w.onmessage = function (event) {
 <li>Web Worker无法访问DOM节点,BOM树；</li>
 <li>Web Worker无法访问全局变量或是全局函数；</li>
 </ul>
-<p><img src="./images/eventloop和线程.png" alt=""></p>
+<p><img src="images/eventloop和线程.png" alt=""></p>
 <p>兼容性：IE10及以上；</p>
 <h2 id="四、由Event-loop机制导致的js定时动画问题"><a href="#四、由Event-loop机制导致的js定时动画问题" class="headerlink" title="四、由Event loop机制导致的js定时动画问题"></a>四、由Event loop机制导致的js定时动画问题</h2><pre><code>function updateAnimations(){
     doAnimation1();
