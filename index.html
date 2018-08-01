@@ -62,9 +62,9 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-eventLoop" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-eventloop" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/08/01/eventLoop/" class="article-date">
+    <a href="/2018/08/01/eventloop/" class="article-date">
   <time datetime="2018-08-01T07:19:10.268Z" itemprop="datePublished">2018-08-01</time>
 </a>
     
@@ -76,7 +76,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/eventLoop/">Event loop</a>
+      <a class="article-title" href="/2018/08/01/eventloop/">Event loop</a>
     </h1>
   
 
@@ -88,20 +88,12 @@
 <li>进程：操作系统分配内存的基本单位，进程所属的内存中保存所有的执行代码和数据；</li>
 <li>线程：CPU执行代码的基本单位；位于进程内部，一个进程可能同时存在多个线程，允许单个任务分成不同的部分运行。</li>
 </ul>
-<h3 id="2、JavaScript是单线程"><a href="#2、JavaScript是单线程" class="headerlink" title="2、JavaScript是单线程"></a>2、JavaScript是单线程</h3><blockquote>
-<p>JavaScript的主要用途是与用户互动，以及操作DOM。这决定了它只能是单线程。那么，加载耗时的JS任务会长时间占用主线程，导致页面内容产时间没有反应。怎么办？</p>
-</blockquote>
-<h3 id="3、同步和异步"><a href="#3、同步和异步" class="headerlink" title="3、同步和异步"></a>3、同步和异步</h3><blockquote>
-<p>所有任务可以分成两种，一种是同步任务（synchronous），另一种是异步任务（asynchronous）;</p>
-</blockquote>
-<p><img src="images/异步和同步的区别.png" alt="同步和异步的区别"></p>
-<blockquote>
+<h3 id="2、JavaScript是单线程"><a href="#2、JavaScript是单线程" class="headerlink" title="2、JavaScript是单线程"></a>2、JavaScript是单线程</h3><p>JavaScript的主要用途是与用户互动，以及操作DOM。这决定了它只能是单线程。那么，加载耗时的JS任务会长时间占用主线程，导致页面内容产时间没有反应。怎么办？</p>
+<h3 id="3、同步和异步"><a href="#3、同步和异步" class="headerlink" title="3、同步和异步"></a>3、同步和异步</h3><p>所有任务可以分成两种，一种是同步任务（synchronous），另一种是异步任务（asynchronous）;</p>
+<p><img src="images/event-1.png" alt="同步和异步的区别"></p>
 <p><strong>总结异步过程的构成要素</strong>：发起一个异步请求、工作线程执行异步任务、通知主线程、主线程调用回调函数</p>
-</blockquote>
-<h2 id="二、Event-loop-核心"><a href="#二、Event-loop-核心" class="headerlink" title="二、Event loop 核心"></a>二、Event loop 核心</h2><blockquote>
-<p>执行脚本时：</p>
-</blockquote>
-<p><img src="./images/执行脚本.png" alt=""></p>
+<h2 id="二、Event-loop-核心"><a href="#二、Event-loop-核心" class="headerlink" title="二、Event loop 核心"></a>二、Event loop 核心</h2><p>执行脚本时：</p>
+<p><img src="./images/event-2.png" alt=""></p>
 <h3 id="1、无异步任务"><a href="#1、无异步任务" class="headerlink" title="1、无异步任务"></a>1、无异步任务</h3><pre><code>function f(b){ 
   var a = 12;
   return a+b+35;
@@ -114,17 +106,13 @@ function g(x){
 }
 
 g(21);
-</code></pre><h3 id="2、有异步任务"><a href="#2、有异步任务" class="headerlink" title="2、有异步任务"></a>2、有异步任务</h3><blockquote>
-<p><strong>事件循环机制:</strong> 就是在执行上下文的过程中，对函数的入栈和出栈。执行前函数先入栈，执行完后函数出栈。如若遇到了一些异步操作像回调函数以及ajax、setTimeout等，会先将他们交给浏览器的其他模块去执行，执行完后，会把回调函数放入到 消息队列 中。当所有的 stack执行完后再开始执行 消息队列 中的函数。 </p>
-</blockquote>
-<p><img src="images/Eventloop.png" alt=""></p>
+</code></pre><h3 id="2、有异步任务"><a href="#2、有异步任务" class="headerlink" title="2、有异步任务"></a>2、有异步任务</h3><p> <strong>事件循环机制:</strong> 就是在执行上下文的过程中，对函数的入栈和出栈。执行前函数先入栈，执行完后函数出栈。如若遇到了一些异步操作像回调函数以及ajax、setTimeout等，会先将他们交给浏览器的其他模块去执行，执行完后，会把回调函数放入到 消息队列 中。当所有的 stack执行完后再开始执行 消息队列 中的函数。 </p>
+<p><img src="images/event-3.png" alt=""></p>
 <pre><code>console.log(1);
 setTimeout(function(){console.log(2);}, 0);
 console.log(3);
-</code></pre><p><img src="images/例题2.png" alt=""></p>
-<blockquote>
+</code></pre><p><img src="images/event-4.png" alt=""></p>
 <p>在异步任务完成后，通知主线程，进入消息队列中，那么浏览器是否可以选择先执行哪个任务？</p>
-</blockquote>
 <h3 id="3、Microtask-和-Macrotask"><a href="#3、Microtask-和-Macrotask" class="headerlink" title="3、Microtask 和 Macrotask"></a>3、Microtask 和 Macrotask</h3><pre><code>(function test() {
     setTimeout(function() {console.log(4)}, 0);
     new Promise(function executor(resolve) {
@@ -138,21 +126,11 @@ console.log(3);
     });
     console.log(3);
 })()
-</code></pre><blockquote>
-<p><strong>总结</strong></p>
-</blockquote>
-<blockquote>
+</code></pre><p><strong>总结</strong></p>
 <p><strong>macro-task包括：</strong> script(整体代码), setTimeout, setInterval, setImmediate, I/O, UI rendering。 </p>
-</blockquote>
-<blockquote>
 <p><strong>micro-task包括：</strong> process.nextTick, Promises, Object.observe, MutationObserver </p>
-</blockquote>
-<blockquote>
 <p><strong>执行顺序：</strong> 函数调用栈清空只剩全局执行上下文，然后开始执行所有的micro-task。当所有可执行的micro-task执行完毕之后。循环再次执行macro-task中的一个任务队列，执行完之后再执行所有的micro-task，就这样一直循环。</p>
-</blockquote>
-<h2 id="三、js异步编程的几种方法"><a href="#三、js异步编程的几种方法" class="headerlink" title="三、js异步编程的几种方法"></a>三、js异步编程的几种方法</h2><blockquote>
-<p>假定有两个函数f1和f2，f1是一个很耗时的任务，f2等待f1的执行结果</p>
-</blockquote>
+<h2 id="三、js异步编程的几种方法"><a href="#三、js异步编程的几种方法" class="headerlink" title="三、js异步编程的几种方法"></a>三、js异步编程的几种方法</h2><p>假定有两个函数f1和f2，f1是一个很耗时的任务，f2等待f1的执行结果</p>
 <h3 id="1、回调函数"><a href="#1、回调函数" class="headerlink" title="1、回调函数"></a>1、回调函数</h3><pre><code>function f1(callback){
 　　　　    setTimeout(function () {
 　　　　　　 // f1的任务代码
@@ -161,9 +139,7 @@ console.log(3);
    }
 
    f1(f2);
-</code></pre><blockquote>
-<p>回调函数的优点:简单、容易理解和部署；缺点：不利于代码的阅读和维护，各个部分之间高度耦合（Coupling），流程混乱。</p>
-</blockquote>
+</code></pre><p>回调函数的优点:简单、容易理解和部署；缺点：不利于代码的阅读和维护，各个部分之间高度耦合（Coupling），流程混乱。</p>
 <h3 id="2、事件监听"><a href="#2、事件监听" class="headerlink" title="2、事件监听"></a>2、事件监听</h3><pre><code>f1.on(&apos;done&apos;, f2);
 
   function f1(){
@@ -172,9 +148,7 @@ console.log(3);
 　　　　　　f1.trigger(&apos;done&apos;);
 　　　　}, 1000);
 　　}
-</code></pre><blockquote>
-<p>优点：易理解，可以绑定多个事件，每个事件可以指定多个回调函数，而且可以”去耦合”（Decoupling），有利于实现模块化。缺点：整个程序都要变成事件驱动型，运行流程会变得很不清晰。</p>
-</blockquote>
+</code></pre><p><strong>优点：</strong>易理解，可以绑定多个事件，每个事件可以指定多个回调函数，而且可以”去耦合”（Decoupling），有利于实现模块化。<br><strong>缺点：</strong>整个程序都要变成事件驱动型，运行流程会变得很不清晰。</p>
 <h3 id="3、发布-订阅"><a href="#3、发布-订阅" class="headerlink" title="3、发布/订阅"></a>3、发布/订阅</h3><pre><code>jQuery.subscribe(&quot;done&quot;, f2);
 
    function f1(){
@@ -193,9 +167,7 @@ console.log(3);
 　　　　}, 500);
 　　　　return dfd.promise;
 　　}
-</code></pre><blockquote>
-<p>优点:回调函数变成了链式写法，程序的流程可以看得很清楚</p>
-</blockquote>
+</code></pre><p>优点:回调函数变成了链式写法，程序的流程可以看得很清楚</p>
 <h3 id="5、web-worker"><a href="#5、web-worker" class="headerlink" title="5、web worker"></a>5、web worker</h3><pre><code>var w=new Worker(&quot;/example/html5/f1_workers.js&quot;)；
 w.onmessage = function (event) {
     console.log(event.data);
@@ -205,7 +177,7 @@ w.onmessage = function (event) {
 <li>Web Worker无法访问DOM节点,BOM树；</li>
 <li>Web Worker无法访问全局变量或是全局函数；</li>
 </ul>
-<p><img src="images/eventloop和线程.png" alt=""></p>
+<p><img src="images/event-5.png" alt=""></p>
 <p>兼容性：IE10及以上；</p>
 <h2 id="四、由Event-loop机制导致的js定时动画问题"><a href="#四、由Event-loop机制导致的js定时动画问题" class="headerlink" title="四、由Event loop机制导致的js定时动画问题"></a>四、由Event loop机制导致的js定时动画问题</h2><pre><code>function updateAnimations(){
     doAnimation1();
@@ -220,7 +192,7 @@ setInterval(updateAnimations, 1000);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/08/01/eventLoop/" data-id="cjkasyksi00003445pz4tgfj9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/08/01/eventloop/" data-id="cjkau3gwp0002cc45po7z3cea" class="article-share-link">Share</a>
       
       
     </footer>
@@ -230,9 +202,9 @@ setInterval(updateAnimations, 1000);
 
 
   
-    <article id="post-两个有序数组合并为一个有序数组" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-merge" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/07/24/两个有序数组合并为一个有序数组/" class="article-date">
+    <a href="/2018/07/24/merge/" class="article-date">
   <time datetime="2018-07-24T13:53:42.859Z" itemprop="datePublished">2018-07-24</time>
 </a>
     
@@ -244,7 +216,7 @@ setInterval(updateAnimations, 1000);
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/24/两个有序数组合并为一个有序数组/">两个有序数组合并为一个有序数组</a>
+      <a class="article-title" href="/2018/07/24/merge/">两个有序数组合并为一个有序数组</a>
     </h1>
   
 
@@ -256,7 +228,7 @@ setInterval(updateAnimations, 1000);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/24/两个有序数组合并为一个有序数组/" data-id="cjjzsmz430000to4503l0tnvv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/24/merge/" data-id="cjkau3gwp0001cc4554lht9s1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -266,9 +238,9 @@ setInterval(updateAnimations, 1000);
 
 
   
-    <article id="post-启动了" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-start" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/04/15/启动了/" class="article-date">
+    <a href="/2018/04/15/start/" class="article-date">
   <time datetime="2018-04-15T12:55:43.000Z" itemprop="datePublished">2018-04-15</time>
 </a>
     
@@ -280,7 +252,7 @@ setInterval(updateAnimations, 1000);
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/15/启动了/">启动了</a>
+      <a class="article-title" href="/2018/04/15/start/">启动了</a>
     </h1>
   
 
@@ -292,7 +264,7 @@ setInterval(updateAnimations, 1000);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/启动了/" data-id="cjg0ticqd0001lk45p3itedsu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/start/" data-id="cjkau3gto0000cc458st73e7t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -378,15 +350,15 @@ setInterval(updateAnimations, 1000);
       <ul>
         
           <li>
-            <a href="/2018/08/01/eventLoop/">Event loop</a>
+            <a href="/2018/08/01/eventloop/">Event loop</a>
           </li>
         
           <li>
-            <a href="/2018/07/24/两个有序数组合并为一个有序数组/">两个有序数组合并为一个有序数组</a>
+            <a href="/2018/07/24/merge/">两个有序数组合并为一个有序数组</a>
           </li>
         
           <li>
-            <a href="/2018/04/15/启动了/">启动了</a>
+            <a href="/2018/04/15/start/">启动了</a>
           </li>
         
           <li>
