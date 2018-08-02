@@ -5,13 +5,13 @@
   
 
   
-  <title>Event loop | Hexo</title>
+  <title>Event loop | a slow walker</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="一、相关概念1、线程和进程 进程：操作系统分配内存的基本单位，进程所属的内存中保存所有的执行代码和数据； 线程：CPU执行代码的基本单位；位于进程内部，一个进程可能同时存在多个线程，允许单个任务分成不同的部分运行。  2、JavaScript是单线程JavaScript的主要用途是与用户互动，以及操作DOM。这决定了它只能是单线程。那么，加载耗时的JS任务会长时间占用主线程，导致页面内容产时间没有">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Event loop">
 <meta property="og:url" content="http://yoursite.com/2018/08/01/eventloop/eventloop/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="a slow walker">
 <meta property="og:description" content="一、相关概念1、线程和进程 进程：操作系统分配内存的基本单位，进程所属的内存中保存所有的执行代码和数据； 线程：CPU执行代码的基本单位；位于进程内部，一个进程可能同时存在多个线程，允许单个任务分成不同的部分运行。  2、JavaScript是单线程JavaScript的主要用途是与用户互动，以及操作DOM。这决定了它只能是单线程。那么，加载耗时的JS任务会长时间占用主线程，导致页面内容产时间没有">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/08/01/eventloop/eventloop/event-1.png">
@@ -25,7 +25,7 @@
 <meta name="twitter:description" content="一、相关概念1、线程和进程 进程：操作系统分配内存的基本单位，进程所属的内存中保存所有的执行代码和数据； 线程：CPU执行代码的基本单位；位于进程内部，一个进程可能同时存在多个线程，允许单个任务分成不同的部分运行。  2、JavaScript是单线程JavaScript的主要用途是与用户互动，以及操作DOM。这决定了它只能是单线程。那么，加载耗时的JS任务会长时间占用主线程，导致页面内容产时间没有">
 <meta name="twitter:image" content="http://yoursite.com/2018/08/01/eventloop/eventloop/event-1.png">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="a slow walker" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -44,7 +44,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
+        <a href="/" id="logo">a slow walker</a>
       </h1>
       
         <h2 id="subtitle-wrap">
