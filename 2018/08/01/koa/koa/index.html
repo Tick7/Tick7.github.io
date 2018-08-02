@@ -16,7 +16,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/08/01/koa/koa/koa-2.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/01/koa/koa/koa-1.png">
-<meta property="og:updated_time" content="2018-08-02T09:29:19.262Z">
+<meta property="og:updated_time" content="2018-08-02T09:32:27.384Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅析 KOA2 中间件机制">
 <meta name="twitter:description" content="一、优点优雅：通过使用async丢弃回调函数轻量：没有捆绑任何中间件 二、koa2的中间件机制123456789101112131415161718192021222324const Koa = require(&amp;apos;koa&amp;apos;);const app = new Koa();async function f1(ctx, next)&amp;#123;    console.log(&amp;quot">
@@ -108,11 +108,14 @@
 <h2 id="源码执行顺序总结"><a href="#源码执行顺序总结" class="headerlink" title="源码执行顺序总结"></a>源码执行顺序总结</h2><p>1、创建一个Koa实例app;<br>2、app.use将中间件依次push进app.middleware，中间件必须是函数;<br>3、app.listen创建了一个http服务器，并监听制定端口;<br>4、当接收到一个请求， 先执行app.callback；callback执行做了如下几件事：</p>
 <ul>
 <li>fn = compose(app.middleware); 将中间件数组合并成一个大的中间件函数 dispatch(i)</li>
-<li>返回回调函数handleRequest(req, res)<br>5、执行回调函数handleRequest(req, res)</li>
+<li>返回回调函数handleRequest(req, res)</li>
+</ul>
+<p>5、执行回调函数handleRequest(req, res)</p>
+<ul>
 <li>将req，res传入到app.createContext生成了ctx，或者说app.context;</li>
 <li>执行 app.handleRequest(ctx, fn);</li>
 </ul>
-<h2 id="用法总结"><a href="#用法总结" class="headerlink" title="用法总结"></a>用法总结</h2><p>1、在一个中间件函数中不能调用两次 next() ,否则会抛出错误</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>1、在一个中间件函数中不能调用两次 next() ,否则会抛出错误</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">next() called multiple times</span><br></pre></td></tr></table></figure>
 <p>2、next()调用后返回的是一个Promise对象，可以调用then函数;</p>
 
