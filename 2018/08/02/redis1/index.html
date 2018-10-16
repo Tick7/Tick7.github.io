@@ -5,19 +5,19 @@
   
 
   
-  <title>Hello World | a slow walker</title>
+  <title>a slow walker</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="Redis学习笔记一、yRedis 是什么？Remote Dictionary Service 的缩写，存储中间件。 二、Redis 有哪些用途 缓存 分布式锁  三、Redis 的数据结构1、string（字符串）2、list（列表）3、set（集合）4、hash（哈希）5、zset（有序集合） 四、分布式锁分布式操作经常遇到并发问题，分布式锁用来限制程序的并发执行； 原子操作：指不会被线程机制">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2018/08/01/hello-world/index.html">
+<meta property="og:title" content="a slow walker">
+<meta property="og:url" content="http://yoursite.com/2018/08/02/redis1/index.html">
 <meta property="og:site_name" content="a slow walker">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="Redis学习笔记一、yRedis 是什么？Remote Dictionary Service 的缩写，存储中间件。 二、Redis 有哪些用途 缓存 分布式锁  三、Redis 的数据结构1、string（字符串）2、list（列表）3、set（集合）4、hash（哈希）5、zset（有序集合） 四、分布式锁分布式操作经常遇到并发问题，分布式锁用来限制程序的并发执行； 原子操作：指不会被线程机制">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-15T12:08:32.819Z">
+<meta property="og:updated_time" content="2018-08-02T10:24:10.126Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="a slow walker">
+<meta name="twitter:description" content="Redis学习笔记一、yRedis 是什么？Remote Dictionary Service 的缩写，存储中间件。 二、Redis 有哪些用途 缓存 分布式锁  三、Redis 的数据结构1、string（字符串）2、list（列表）3、set（集合）4、hash（哈希）5、zset（有序集合） 四、分布式锁分布式操作经常遇到并发问题，分布式锁用来限制程序的并发执行； 原子操作：指不会被线程机制">
   
     <link rel="alternate" href="/atom.xml" title="a slow walker" type="application/atom+xml">
   
@@ -68,42 +68,31 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-redis1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/08/01/hello-world/" class="article-date">
-  <time datetime="2018-08-01T09:19:03.694Z" itemprop="datePublished">2018-08-01</time>
+    <a href="/2018/08/02/redis1/" class="article-date">
+  <time datetime="2018-08-02T10:11:32.782Z" itemprop="datePublished">2018-08-02</time>
 </a>
     
   </div>
   <div class="article-inner">
     
     
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Hello World
-    </h1>
-  
-
-      </header>
-    
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h1 id="Redis学习笔记"><a href="#Redis学习笔记" class="headerlink" title="Redis学习笔记"></a>Redis学习笔记</h1><h2 id="一、yRedis-是什么？"><a href="#一、yRedis-是什么？" class="headerlink" title="一、yRedis 是什么？"></a>一、yRedis 是什么？</h2><p>Remote Dictionary Service 的缩写，存储中间件。</p>
+<h2 id="二、Redis-有哪些用途"><a href="#二、Redis-有哪些用途" class="headerlink" title="二、Redis 有哪些用途"></a>二、Redis 有哪些用途</h2><ul>
+<li>缓存</li>
+<li>分布式锁</li>
+</ul>
+<h2 id="三、Redis-的数据结构"><a href="#三、Redis-的数据结构" class="headerlink" title="三、Redis 的数据结构"></a>三、Redis 的数据结构</h2><p>1、string（字符串）<br>2、list（列表）<br>3、set（集合）<br>4、hash（哈希）<br>5、zset（有序集合）</p>
+<h2 id="四、分布式锁"><a href="#四、分布式锁" class="headerlink" title="四、分布式锁"></a>四、分布式锁</h2><p>分布式操作经常遇到并发问题，分布式锁用来限制程序的并发执行；</p>
+<p><strong>原子操作：</strong>指不会被线程机制调度打断的操作；一旦开始就一直运行到结束，中间不会有任何contex switch切换</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/08/01/hello-world/" data-id="cjkaxjn5s00011g45nhbl1xba" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/08/02/redis1/" data-id="cjnbs3nmo0000uw450tbxwktq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -112,19 +101,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/08/01/koa/koa/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/08/05/inherit/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          浅析 KOA2 中间件机制
+          (no title)
         
       </div>
     </a>
   
   
-    <a href="/2018/08/01/eventloop/eventloop/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/08/01/merge/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Event loop</div>
+      <div class="article-nav-title">两个有序数组合并为一个有序数组</div>
     </a>
   
 </nav>
